@@ -2,15 +2,16 @@
 
 namespace AdventOfCode2019.Logic
 {
-    public static class DayOne
+    public static class Day1
     {
-        public static int CalculateAllFuelModules(int[] massInputs)
+        // Only for modules (task 1)
+        public static int CalculateFuelModules()
         {
+            int[] massInputs = Helper.FileHandler.GetInput("input_01");
             int totalFuel = 0;
             for (int i = 0; i < massInputs.Length; i++)
             {
-                //totalFuel += CalculateFuel(massInputs[i]);
-                totalFuel += RecursiveCalculateFuel(massInputs[i]);
+                totalFuel += CalculateFuel(massInputs[i]);
             }
             return totalFuel;
         }
@@ -25,6 +26,19 @@ namespace AdventOfCode2019.Logic
             {
                 return 0;
             }
+        }
+
+        // Modules + fuel (task 2)
+        public static int CalculateTotalFuelModules()
+        {
+            int[] massInputs = Helper.FileHandler.GetInput("input_01");
+            int totalFuel = 0;
+            for (int i = 0; i < massInputs.Length; i++)
+            {
+                //totalFuel += CalculateFuel(massInputs[i]);
+                totalFuel += RecursiveCalculateFuel(massInputs[i]);
+            }
+            return totalFuel;
         }
 
         private static int RecursiveCalculateFuel(int mass)
