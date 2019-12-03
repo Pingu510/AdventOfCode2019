@@ -9,7 +9,7 @@ namespace AdventOfCode2019
             Console.WriteLine("Hello Santa!");
             Day1();
             Day2();
-
+            Day3();
 
 
             Console.ReadKey();
@@ -31,6 +31,12 @@ namespace AdventOfCode2019
 
             int[] startValues = Logic.Day2.CalculateStartValues(19690720);
             Console.WriteLine("2.2. Computer noun was {0} and verb was {1} which totals in {2}.", startValues[0], startValues[1], (100 * startValues[0] + startValues[1]));
+        }
+
+        static void Day3()
+        {
+            var result = Logic.Day3.CrossTheStreams();
+            Console.WriteLine("3.1. Found the closest intersection, it was {0}", result);
         }
     }
 }
