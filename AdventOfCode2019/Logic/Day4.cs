@@ -11,9 +11,9 @@ namespace AdventOfCode2019.Logic
         public static (string, string) CodeCracking()
         {
             var first = FindPasswordPossibilities();
+            var second = SollPasswords(first);
 
-
-            return (first.Count.ToString(), "");
+            return (first.Count.ToString(), second.Count.ToString());
         }
 
         private static List<int> FindPasswordPossibilities()
@@ -43,6 +43,17 @@ namespace AdventOfCode2019.Logic
             }
             return possiblePasswords;
         }
+
+        private static List<int> SollPasswords(List<int> passwordPosibilities)
+        {
+            var matchingPasswords = new List<int>();
+            foreach (int password in passwordPosibilities)
+            {
+                var possibilities = password.ToString().ToCharArray().Select(x => (int)Char.GetNumericValue(x)).ToArray();
+                if (possibilities.AtleastOneSingleDouble()) matchingPasswords.Add(password);
+            }
+            return matchingPasswords;
+        }
     }
     public static class ExtensionMethod
     {
@@ -53,6 +64,21 @@ namespace AdventOfCode2019.Logic
                 if (number[i] == number[i + 1]) return true;
             }
             return false;
+        }
+
+        public static bool AtleastOneSingleDouble(this int[] number)
+        {
+            bool pass= false;
+            for (int i = 0; i < number.Length - 1; i++)
+            {
+                if (number[i] == number[i + 1])
+                {
+                    if (i != 0 && number[i] != number[i - 1]) { continue; }
+                    else if (i - 2 >= 0 && i <= number.Length - 3 && number[i] == number[i + 2]) { continue; }
+                    pass = true; 
+                }
+            }
+            return pass;
         }
 
         public static bool IncreasingNumbers(this int[] number)
