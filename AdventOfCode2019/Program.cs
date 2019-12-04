@@ -36,7 +36,8 @@ namespace AdventOfCode2019
         static void Day3()
         {
             var result = Logic.Day3.CrossTheStreams();
-            Console.WriteLine("3.1. Found the closest intersection, it was {0}", result);
+            Console.WriteLine("3.1. Found the closest intersection, it was {0}", result.Item1);
+            Console.WriteLine("3.2. The closest one step wise was {0}", result.Item2);
         }
     }
 }

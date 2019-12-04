@@ -13,13 +13,18 @@ namespace AdventOfCode2019.Logic
             public int Y { get; set; }
         }
 
-        public static string CrossTheStreams()
+        public static Tuple<string, string> CrossTheStreams()
         {
             var massInputs = Helper.FileHandler.GetDoubleInput("input_03");
+            
             var wire1Positions = PerformAllSteps(massInputs.Item1);
             var wire2Positions = PerformAllSteps(massInputs.Item2);
 
-            return CalculateClosestIntersection(wire1Positions.Intersect(wire2Positions).ToList());
+            string closest = CalculateClosestIntersection(wire1Positions.Intersect(wire2Positions).ToList());
+
+            string closestStepIntersection = CalculateClosestIntersectionStep(wire1Positions, wire2Positions);
+
+            return new Tuple<string, string>(closest, closestStepIntersection);
         }
 
         private static List<Point> PerformAllSteps(string[] inputs)
@@ -62,16 +67,29 @@ namespace AdventOfCode2019.Logic
             return positions;
         }
 
-        private static string CalculateClosestIntersection(List<Point> intersectingWire)
+        private static string CalculateClosestIntersection(List<Point> intersectingPoints)
         {
             int closest = int.MaxValue;
 
-            foreach (Point position in intersectingWire)
+            foreach (Point position in intersectingPoints)
             {
                 int distance = Math.Abs(position.X) + Math.Abs(position.Y);
                 if (distance < closest) closest = distance;
             }
             return closest.ToString();
+        }
+
+        private static string CalculateClosestIntersectionStep(List<Point> wire1, List<Point> wire2)
+        {
+            var intersections = wire1.Intersect(wire2);
+            var minSteps = Int32.MaxValue;
+            foreach (var intersection in intersections)
+            {
+                int combinedSteps = wire1.IndexOf(intersection) + wire2.IndexOf(intersection);
+                if (combinedSteps < minSteps) minSteps = combinedSteps;
+            }
+            minSteps += 2;
+            return minSteps.ToString();
         }
     }
 }
