@@ -10,7 +10,7 @@ namespace AdventOfCode2019
             Day1();
             Day2();
             Day3();
-
+            Day4();
 
             Console.ReadKey();
         }
@@ -38,6 +38,13 @@ namespace AdventOfCode2019
             var result = Logic.Day3.CrossTheStreams();
             Console.WriteLine("3.1. Found the closest intersection, it was {0}", result.Item1);
             Console.WriteLine("3.2. The closest one step wise was {0}", result.Item2);
+        }
+        
+        static void Day4()
+        {
+            var result = Logic.Day4.CodeCracking();
+            Console.WriteLine("4.1. After the elves description there was {0} matching passwords.", result.Item1);
+            Console.WriteLine("4.2. Luckilly they narrowed it down to {0} solutions.", result.Item2);
         }
     }
 }
