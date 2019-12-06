@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AdventOfCode2019.Logic
 {
@@ -22,24 +21,14 @@ namespace AdventOfCode2019.Logic
             var possiblePasswords = new List<int>();
             int startValue = Int32.Parse(nums[0]);
             int endValue = Int32.Parse(nums[1]);
-            int[] currentNumber = nums[0].ToCharArray().Select(x => (int)Char.GetNumericValue(x)).ToArray();
 
             while (startValue <= endValue)
             {
-                if (currentNumber.ContainsDouble() && currentNumber.IncreasingNumbers())
+                if (startValue.ContainsDouble() && startValue.NoDecrease())
                 {
                     possiblePasswords.Add(startValue);
                 }
-                startValue++;
-                for (int i = 5; i >= 0; i--)
-                {
-                    if (currentNumber[i] < 9)
-                    {
-                        currentNumber[i]++;
-                        break;
-                    }
-                    currentNumber[i] = 0;
-                }
+                startValue++;                
             }
             return possiblePasswords;
         }
@@ -49,43 +38,43 @@ namespace AdventOfCode2019.Logic
             var matchingPasswords = new List<int>();
             foreach (int password in passwordPosibilities)
             {
-                var possibilities = password.ToString().ToCharArray().Select(x => (int)Char.GetNumericValue(x)).ToArray();
-                if (possibilities.AtleastOneSingleDouble()) matchingPasswords.Add(password);
+                if (password.AtleastOneSingleDouble() && password.NoDecrease()) matchingPasswords.Add(password);
             }
             return matchingPasswords;
         }
     }
     public static class ExtensionMethod
     {
-        public static bool ContainsDouble(this int[] number)
+        public static bool ContainsDouble(this int number)
         {
-            for (int i = 0; i < number.Length - 1; i++)
+            string passcode = number.ToString();
+            for (int i = 0; i < passcode.Length - 1; i++)
             {
-                if (number[i] == number[i + 1]) return true;
+                if (passcode[i] == passcode[i + 1]) return true;
             }
             return false;
         }
 
-        public static bool AtleastOneSingleDouble(this int[] number)
+        public static bool AtleastOneSingleDouble(this int number)
         {
-            bool pass= false;
-            for (int i = 0; i < number.Length - 1; i++)
+            string passcode = number.ToString();
+            for (int i = 0; i < passcode.Length - 1; i++)
             {
-                if (number[i] == number[i + 1])
+                int occurance = passcode.Count(x => x == passcode[i + 1]);
+                if (passcode[i] == passcode[i + 1] && occurance == 2)
                 {
-                    if (i != 0 && number[i] != number[i - 1]) { continue; }
-                    else if (i - 2 >= 0 && i <= number.Length - 3 && number[i] == number[i + 2]) { continue; }
-                    pass = true; 
+                    return true;
                 }
             }
-            return pass;
+            return false;
         }
 
-        public static bool IncreasingNumbers(this int[] number)
+        public static bool NoDecrease(this int number)
         {
-            for (int i = 0; i < number.Length - 1; i++)
+            string passcode = number.ToString();
+            for (int i = 0; i < passcode.Length - 1; i++)
             {
-                if (number[i] > number[i + 1]) return false;
+                if (passcode[i] > passcode[i + 1]) return false;
             }
             return true;
         }
