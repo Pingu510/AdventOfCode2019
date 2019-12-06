@@ -7,10 +7,8 @@ namespace AdventOfCode2019
         static void Main(string[] args)
         {
             Console.WriteLine("Hello Santa!");
-            Day1();
-            Day2();
-            Day3();
-            Day4();
+            Day5();
+            Day6();
 
             Console.ReadKey();
         }
@@ -45,6 +43,17 @@ namespace AdventOfCode2019
             var result = Logic.Day4.CodeCracking();
             Console.WriteLine("4.1. After the elves description there was {0} matching passwords.", result.Item1);
             Console.WriteLine("4.2. Luckilly they narrowed it down to {0} solutions.", result.Item2);
+        }
+
+        static void Day5()
+        {
+            var result = Logic.Day5.Test();
+            Console.WriteLine("5.1. {0}", result);
+        }
+        static void Day6()
+        {
+            var result = Logic.Day6.TotalOrbits();
+            Console.WriteLine("6.1. The star map whows that theres a total of {0} orbits.", result);
         }
     }
 }
