@@ -7,7 +7,7 @@ namespace AdventOfCode2019
         static void Main(string[] args)
         {
             Console.WriteLine("Hello Santa!");
-            Day5();
+            //Day5();
             Day6();
 
             Console.ReadKey();

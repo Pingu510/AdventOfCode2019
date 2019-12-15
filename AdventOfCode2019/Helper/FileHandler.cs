@@ -27,5 +27,12 @@ namespace AdventOfCode2019.Helper
 
             return (line1, line2);
         }
+
+        public static string[] GetPerRow(string fileName)
+        {
+            var input = File.ReadAllText("./Resources/" + fileName + ".txt");
+            string[] rows = input.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            return rows;
+        }
     }
 }
