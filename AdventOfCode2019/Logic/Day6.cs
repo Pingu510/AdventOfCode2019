@@ -7,11 +7,26 @@ namespace AdventOfCode2019.Logic
 {
     public static class Day6
     {
-        public static int TotalOrbits()
+        public static (int,int) CalculateTravelPaths()
         {
             var planets = new List<Planet>();
-            string[] orbits = Helper.FileHandler.GetPerRow("input_06");
-            
+            //string[] orbits = Helper.FileHandler.GetPerRow("input_06");
+            string[] orbits = { "COM)B", "B)C", "C)D", "D)E", "E)F", "B)G", "G)H", "D)I", "E)J", "J)K", "K)L", "K)YOU", "I)SAN" };
+
+            int totalOrbits = TotalOrbits(planets, orbits);
+            int minTravelPath = CalculateMinDistanceToSanta(planets);
+
+            return (totalOrbits, minTravelPath);
+        }
+
+        /// <summary>
+        /// Calculate how many orbits there are in total
+        /// </summary>
+        /// <param name="planets"></param>
+        /// <param name="orbits"></param>
+        /// <returns></returns>
+        private static int TotalOrbits(List<Planet> planets, string[] orbits)
+        {
             //create planets
             foreach (var planetCombo in orbits)
             {
@@ -35,6 +50,9 @@ namespace AdventOfCode2019.Logic
             {
                 totalOrbits += item.OrbitsTotals;
             }
+
+
+
             return totalOrbits;
         }
 
@@ -67,6 +85,14 @@ namespace AdventOfCode2019.Logic
             }
             planet.OrbitsTotals = totalOrbits;
         }
+    
+        private static int CalculateMinDistanceToSanta(List<Planet> planets)
+        {
+
+
+            throw new NotImplementedException();
+        }
+
     }
 
     public class Planet

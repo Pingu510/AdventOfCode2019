@@ -52,8 +52,9 @@ namespace AdventOfCode2019
         }
         static void Day6()
         {
-            var result = Logic.Day6.TotalOrbits();
-            Console.WriteLine("6.1. The star map whows that theres a total of {0} orbits.", result);
+            var result = Logic.Day6.CalculateTravelPaths();
+            Console.WriteLine("6.1. The star map whows that theres a total of {0} orbits.", result.Item1);
+            Console.WriteLine("6.2. Between me and Santa there is {0} orbits.", result.Item2);
         }
     }
 }
